@@ -1,8 +1,17 @@
-[package]
-name = "less-rs"
-version = "0.1.0"
-edition = "2021"
+[workspace]
+members = [
+  "crates/parser",
+  "crates/tokenizer",
+]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[profile.release]
+codegen-units = 1
+lto = true
+panic = "abort"
+debug = true
 
-[dependencies]
+[profile.bench]
+codegen-units = 1
+lto = true
+panic = "abort"
+debug = true

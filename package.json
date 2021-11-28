@@ -1,0 +1,22 @@
+{
+  "name": "less-rs",
+  "version": "0.0.1",
+  "description": "🚀 less-rs is a fast compiler for less.js ,written in rust.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/less-rs/less-rs.git"
+  },
+  "keywords": [
+    "less"
+  ],
+  "author": "dellyoung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/less-rs/less-rs/issues"
+  },
+  "homepage": "https://github.com/less-rs/less-rs#readme"
+}
