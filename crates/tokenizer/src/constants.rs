@@ -1,49 +1,25 @@
+pub const SINGLE_QUOTE: char = '\'';
+pub const DOUBLE_QUOTE: char = '"';
+pub const BACKSLASH: char = '\\';
+pub const SLASH: char = '/';
 
-// #[warn(non_snake_case)]
-#[warn(dead_code)]
-pub struct WordType {
-    pub singlequote: char,
-    pub doublequote: char,
-    pub backslash: char,
-    pub slash: char,
-    pub newline: char,
-    pub space: char,
-    pub feed: char,
-    pub tab: char,
-    pub cr: char,
-    pub opensquare: char,
-    pub closesquare: char,
-    pub openparentheses: char,
-    pub closeparentheses: char,
-    pub opencurly: char,
-    pub closecurly: char,
-    pub semicolon: char,
-    pub asterisk: char,
-    pub colon: char,
-    pub at: char,
-}
+pub const NEWLINE: char = '\n';
+pub const SPACE: char = ' ';
+pub const FEED: char = '\u{c}'; // \f
+pub const TAB: char = '\t';
+pub const CR: char = '\r';
 
-pub const WORD_MAP: WordType = WordType {
-    singlequote: '\'',
-    doublequote: '"',
-    backslash: '\\',
-    slash: '/',
-    newline: '\n',
-    space: ' ',
-    feed: '\u{c}',
-    tab: '\t',
-    cr: '\r',
-    opensquare: '[',
-    closesquare: ']',
-    openparentheses: '(',
-    closeparentheses: ')',
-    opencurly: '{',
-    closecurly: '}',
-    semicolon: ',',
-    asterisk: '*',
-    colon: ':',
-    at: '@',
-};
+pub const OPEN_SQUARE: char = '[';
+pub const CLOSE_SQUARE: char = ']';
+pub const OPEN_PARENTHESES: char = '(';
+pub const CLOSE_PARENTHESES: char = ')';
+pub const OPEN_CURLY: char = '{';
+pub const CLOSE_CURLY: char = '}';
+
+pub const SEMICOLON: char = ';';
+pub const ASTERISK: char = '*';
+pub const COLON: char = ':';
+pub const AT: char = '@';
 
 #[derive(Debug)]
 pub enum TokenType {

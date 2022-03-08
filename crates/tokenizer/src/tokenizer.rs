@@ -1,6 +1,6 @@
 use std::cell::RefCell;
 use crate::utils;
-use crate::constants::WORD_MAP;
+use crate::constants;
 use crate::constants::TokenType;
 // use crate::constants;
 // #[warn(dead_code)]
@@ -38,27 +38,39 @@ impl<'a> Tokenizer<'a> {
     }
 
     pub fn end_of_file(&self) -> bool{
-        println!("constants{}", WORD_MAP.singlequote);
+        println!("constants{}", constants::SINGLE_QUOTE);
         return true;
+    }
+
+    #[inline]
+    fn pos_plus_one(&self) {
+        self.pos.replace_with(|it| *it + 1);
     }
 
     pub fn next_token(&self, _ignore_unclosed: bool) -> Token {
         let mut code = utils::char_code_at(self.less, self.position());
         let current_token: Token;
         // let { singlequote } = WORD_MAP;
-        const singlequote: char = WORD_MAP.singlequote;
         match code {
-            singlequote => {
-              let mut next = self.position();
-              loop {
-                next += 1;
-                code = utils::char_code_at(self.less, next);
-                if !(code == SPACE || code == NEWLINE || code == TAB || code == FEED) {
-                  break;
+            constants::NEWLINE | constants::SPACE | constants::TAB | constants::CR | constants::FEED => {
+                let mut next = self.position();
+                loop {
+                  next += 1;
+                  code = utils::char_code_at(self.less, next);
+                  if !(code == constants::SPACE || code == constants::NEWLINE || code == constants::TAB || code == constants::FEED) {
+                    break;
+                  }
                 }
-              }
-              current_token = Token(TokenType::Space, self.position(), next);
-              self.pos.replace(next);
+                current_token = Token(TokenType::Space, self.position(), next);
+                self.pos.replace(next);
+            }
+            constants::OPEN_SQUARE | constants::CLOSE_SQUARE | constants::OPEN_CURLY | constants::CLOSE_CURLY | constants::COLON | constants::SEMICOLON | constants::CLOSE_PARENTHESES => {
+                let start = self.position();
+                current_token = Token(utils::get_token_type(code), start, start + 1);
+                self.pos_plus_one();
+            }
+            _ => {
+                current_token = Token(utils::get_token_type(code), 1, 2);
             }
         }
         current_token
