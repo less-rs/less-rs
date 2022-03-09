@@ -1,7 +1,7 @@
 use std::fs::read_to_string;
 use std::time::Instant;
 use tokenizer::Tokenizer;
-
+// 词法分析
 fn main() {
     println!("less-rs tokenizer");
     let file = "base.less";
@@ -9,10 +9,9 @@ fn main() {
     let mut vec = Vec::default();
     let start = Instant::now();
     let processor = Tokenizer::new(&less, false);
-    vec.push(processor.next_token(true));
-    // while !processor.end_of_file()  {
-    //   vec.push(processor.next_token(false));
-    // }
+    while !processor.end_of_file()  {
+      vec.push(processor.next_token(false));
+    }
     let end = start.elapsed();
     println!("rust: tokenizer/{}: {:?}", file, end);
 }

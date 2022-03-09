@@ -24,6 +24,30 @@ pub fn get_token_type(ch: char) -> TokenType {
     }
 }
 
+pub fn index_of_word_end(s: &str, start: usize) -> usize {
+    let bytes = s.as_bytes();
+    let mut i = start;
+    let len = bytes.len();
+
+    while i < len {
+        match bytes[i] as char {
+        '\t' | '\n' | '\u{c}' | '\r' | ' ' | '!' | '"' | '#' | '\'' | '(' | ')' | ':' | ';' | '@'
+        | '[' | '\\' | ']' | '{' | '}' => {
+            return i;
+        }
+        '/' => {
+            if bytes[i + 1] as char == '*' {
+            return i;
+            } else {
+            i += 1;
+            }
+        }
+        _ => i += 1,
+        };
+    }
+    i
+}
+
 pub fn hello(name: String) -> String {
     format!("Hello, {}!", name)
 }
